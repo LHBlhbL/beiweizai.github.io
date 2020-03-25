@@ -1,33 +1,49 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: L
-  Date: 2020/3/19
-  Time: 21:58
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<html>
-  <head>
-    <title>music</title>
-  </head>
-  <body style="background-color: #4e555b">
-
-  <form method="post">
-    <div class="mx-auto " style="width: 40%;">
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="ÇëÊäÈëÒôÀÖÃû³Æ" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="myfuction()">Button</button>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <title>Title</title>
+</head>
+<body style="background-color: #4e555b">
+<form method="post">
+    <div class="mx-auto " style="width: 40%; margin-top: 250px">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="musciname" placeholder="è¯·è¾“å…¥éŸ³ä¹åç§°" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="myfuction()">Button</button>
+            </div>
         </div>
-      </div>
     </div>
-  </form>
-
-  </body>
+</form>
+<p id="music">123</p>
+</body>
 <script>
-  function myfuction() {
-    window.location.replace("http://music.migu.cn/v3");
-  }
+    function fail(code) {
+       alert('Error code: ' + code);
+    }
+
+
+    function myfuction() {
+        var musicname =   document.getElementById('musciname');
+        let url ='http://api.migu.jsososo.com/search?keyword=';
+        let newurl = url+musicname.value;
+        console.log(newurl);
+        var mus = new  XMLHttpRequest();
+        mus.onreadystatechange=function () {
+                 if (mus.readyState === 4 ){
+                    return update(mus.responseType);
+                 }
+
+        }
+        mus.open('GET',newurl);
+        mus.send();
+    }
+    function update(data) {
+              var p = document.getElementById('music');
+               p.innerText=data;
+    }
+
 </script>
 </html>
